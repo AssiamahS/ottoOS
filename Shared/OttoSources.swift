@@ -66,7 +66,7 @@ enum OttoSources {
                                                title: r.title ?? "Untitled",
                                                start: due,
                                                end: nil,
-                                               isAllDay: due.map { r.dueDateComponents?.hour == nil } ?? false,
+                                               isAllDay: due != nil && r.dueDateComponents?.hour == nil,
                                                color: Color(cgColor: r.calendar.cgColor),
                                                listName: r.calendar.title,
                                                isPinned: isNote && r.priority == 1))
