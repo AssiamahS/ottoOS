@@ -13,3 +13,5 @@
 - ImageRenderer cannot draw materials, so the canvas uses an explicit dim + blur.
 - CI-only builds (no local Xcode). `gh workflow run CI --ref main` after a push
   if the run doesn't start on its own.
+- AppShortcut phrases: \(\.$param) is only legal for AppEnum/AppEntity parameters; a String param there is an appintentsmetadataprocessor halting error (CI run 34373985431).
+- Preview scaling: scaleEffect keeps the original layout box, so anchor .topLeading inside a smaller frame shifts the canvas; scale around the centre.
