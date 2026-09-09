@@ -91,7 +91,9 @@ struct OttoProvider: AppIntentTimelineProvider {
         dates += Array(Set(boundaries)).sorted().prefix(12)
 
         let entries = dates.map { OttoEntry(date: $0, agenda: agenda, config: configuration) }
-        let refresh = min(endOfDay, now.addingTimeInterval(30 * 60))
+        let hour = Calendar.current.component(.hour, from: now)
+        let awake = (7..<23).contains(hour)
+        let refresh = min(endOfDay, now.addingTimeInterval(awake ? 20 * 60 : 60 * 60))
         return Timeline(entries: entries, policy: .after(refresh))
     }
 }

@@ -57,7 +57,7 @@ struct WallpaperView: View {
             let ref = LockScreenLayout.referenceSize
             let h = w * ref.height / ref.width
             WallpaperCanvas(agenda: model.agenda, style: model.style, background: model.background, size: ref)
-                .scaleEffect(w / ref.width, anchor: .topLeading)
+                .scaleEffect(w / ref.width)
                 .frame(width: w, height: h)
                 .overlay(alignment: .top) { fakeClock.padding(.top, h * 0.09) }
                 .clipShape(RoundedRectangle(cornerRadius: 34))

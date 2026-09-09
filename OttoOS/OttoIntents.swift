@@ -1,6 +1,7 @@
 import AppIntents
 import SwiftUI
 import UniformTypeIdentifiers
+import WidgetKit
 
 /// Shortcuts building block: returns the rendered wallpaper as a PNG so an
 /// automation can hand it to "Set Wallpaper" every morning.
@@ -39,9 +40,16 @@ struct AddOttoNoteIntent: AppIntent {
     @Parameter(title: "Pin to top", default: false)
     var pinned: Bool
 
+    @Parameter(title: "When")
+    var when: Date?
+
     @MainActor
     func perform() async throws -> some IntentResult & ProvidesDialog {
-        try OttoSources.addNote(text, pinned: pinned)
+        try OttoSources.addNote(text, pinned: pinned, due: when)
+        WidgetCenter.shared.reloadAllTimelines()
+        if let when {
+            return .result(dialog: "On the lock screen for \(when.formatted(date: .omitted, time: .shortened)).")
+        }
         return .result(dialog: "On the lock screen.")
     }
 }
@@ -53,6 +61,7 @@ struct OttoOSShortcuts: AppShortcutsProvider {
             phrases: [
                 "Add a note to \(.applicationName)",
                 "Put a note on my lock screen with \(.applicationName)",
+                "Add \(\.$text) to \(.applicationName)",
             ],
             shortTitle: "Add Note",
             systemImageName: "note.text.badge.plus"
