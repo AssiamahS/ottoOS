@@ -61,7 +61,6 @@ struct OttoOSShortcuts: AppShortcutsProvider {
             phrases: [
                 "Add a note to \(.applicationName)",
                 "Put a note on my lock screen with \(.applicationName)",
-                "Add \(\.$text) to \(.applicationName)",
             ],
             shortTitle: "Add Note",
             systemImageName: "note.text.badge.plus"
