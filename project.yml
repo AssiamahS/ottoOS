@@ -1,0 +1,73 @@
+name: OttoOS
+options:
+  bundleIdPrefix: com.djsly
+  deploymentTarget:
+    iOS: "26.0"
+  xcodeVersion: "26.0"
+  createIntermediateGroups: true
+
+settings:
+  base:
+    SWIFT_VERSION: "5.9"
+    MARKETING_VERSION: 1.0.1
+    CURRENT_PROJECT_VERSION: 1
+    DEVELOPMENT_TEAM: QGMAWHX827
+    CODE_SIGN_STYLE: Automatic
+
+targets:
+  OttoOS:
+    type: application
+    platform: iOS
+    sources:
+      - OttoOS
+      - Shared
+    dependencies:
+      - target: OttoOSWidgets
+    info:
+      path: OttoOS/Info.plist
+      properties:
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        CFBundleDisplayName: OttoOS
+        CFBundleIconName: AppIcon
+        UILaunchScreen: {}
+        UISupportedInterfaceOrientations: [UIInterfaceOrientationPortrait]
+        ITSAppUsesNonExemptEncryption: false
+        NSCalendarsFullAccessUsageDescription: OttoOS reads your calendars to show today's events on your lock screen wallpaper and widgets.
+        NSRemindersFullAccessUsageDescription: OttoOS reads your reminders and keeps its own "OttoOS" list for quick notes so they show on your lock screen.
+        NSPhotoLibraryAddUsageDescription: OttoOS saves the wallpaper it builds for you into your photo library.
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.djsly.ottoos
+        TARGETED_DEVICE_FAMILY: "1"
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+
+  OttoOSWidgets:
+    type: app-extension
+    platform: iOS
+    sources:
+      - OttoOSWidgets
+      - Shared
+    info:
+      path: OttoOSWidgets/Info.plist
+      properties:
+        CFBundleShortVersionString: $(MARKETING_VERSION)
+        CFBundleVersion: $(CURRENT_PROJECT_VERSION)
+        CFBundleDisplayName: OttoOS
+        NSCalendarsFullAccessUsageDescription: OttoOS reads your calendars to show today's events on your lock screen.
+        NSRemindersFullAccessUsageDescription: OttoOS reads your reminders and its own quick notes to show them on your lock screen.
+        NSExtension:
+          NSExtensionPointIdentifier: com.apple.widgetkit-extension
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.djsly.ottoos.widgets
+        TARGETED_DEVICE_FAMILY: "1"
+        SKIP_INSTALL: true
+
+schemes:
+  OttoOS:
+    build:
+      targets:
+        OttoOS: all
+    run:
+      config: Debug
