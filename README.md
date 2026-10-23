@@ -1,5 +1,7 @@
 # OttoOS
 
+**Install:** open [assiamahs.github.io/ottoOS/install.html](https://assiamahs.github.io/ottoOS/install.html) in Safari on your iPhone.
+
 Lock screen calendar, reminders and notes for iPhone — on your own photo.
 
 - Pick any photo, OttoOS draws today's events, reminders and Otto notes on it
